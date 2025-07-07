@@ -1,3 +1,4 @@
 *.tfstate*
 .terraform
 *.tfvars
+bdd_email_svc.zip
