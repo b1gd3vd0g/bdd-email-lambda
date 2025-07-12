@@ -14,7 +14,7 @@ resource "aws_iam_role" "lambda_execution" {
 
 resource "aws_iam_role_policy_attachment" "logs" {
   role       = aws_iam_role.lambda_execution.name
-  policy_arn = "awn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
 resource "aws_lambda_function" "email_service" {
