@@ -1,3 +1,4 @@
+const path = require('path');
 const fs = require('fs');
 const transporter = require('./transporter');
 const { ApiResponse } = require('../util/api_response');
@@ -29,7 +30,7 @@ exports.sendContactFormEmail = async function (
       .replace(/~~MESSAGE~~/g, message);
   }
 
-  const templatePath = '../templates/cf_message';
+  const templatePath = path.join(__dirname, '../cf_message');
   const htmlTemplate = fs.readFileSync(`${templatePath}.html`).toString();
   const txtTemplate = fs.readFileSync(`${templatePath}.txt`).toString();
   const html = fillInTemplate(htmlTemplate);
