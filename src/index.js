@@ -1,13 +1,7 @@
 const { sendContactFormEmail } = require('./mail/contact_sender');
 
-const ALLOWED_ORIGINS = ['https://bigdevdog.com', 'https://www.bigdevdog.com'];
-const ALLOWED_METHODS = ['OPTIONS', 'POST'];
-const ALLOWED_HEADERS = ['Content-Type'];
-
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': ALLOWED_ORIGINS,
-  'Access-Control-Allow-Methods': ALLOWED_METHODS,
-  'Access-Control-Allow-Headers': ALLOWED_HEADERS
+const HEADERS = {
+  'Content-Type': 'application/json'
 };
 
 // TODO: deal ONLY with routes and handlers here. Move handlers for specific
@@ -15,20 +9,10 @@ const CORS_HEADERS = {
 // that.
 
 exports.handler = async (event) => {
-  const { routeKey, body, headers } = event;
+  const { routeKey, body } = event;
   const [method, path] = routeKey.split(' ');
-  console.log({ method, path });
-  console.log({ headers });
-  if (path === '/contact') {
-    if (method === 'OPTIONS') {
-      const originAllowed = ALLOWED_ORIGINS.includes(headers.origin);
-      return {
-        statusCode: originAllowed ? 204 : 403,
-        headers: CORS_HEADERS,
-        body: ''
-      };
-    }
 
+  if (path === '/contact') {
     if (method === 'POST') {
       const parsedBody = JSON.parse(body);
       const { name, email, phone, header, message } = parsedBody;
@@ -41,7 +25,7 @@ exports.handler = async (event) => {
       );
       return {
         statusCode: status,
-        headers: CORS_HEADERS,
+        headers: HEADERS,
         body: JSON.stringify(info)
       };
     }
