@@ -30,7 +30,7 @@ exports.sendContactFormEmail = async function (
       .replace(/~~MESSAGE~~/g, message);
   }
 
-  const templatePath = path.join(__dirname, '../cf_message');
+  const templatePath = path.join(__dirname, '../templates/cf_message');
   const htmlTemplate = fs.readFileSync(`${templatePath}.html`).toString();
   const txtTemplate = fs.readFileSync(`${templatePath}.txt`).toString();
   const html = fillInTemplate(htmlTemplate);
