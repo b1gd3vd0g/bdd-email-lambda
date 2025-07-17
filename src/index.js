@@ -1,4 +1,4 @@
-const sendContactFormEmail = require('./handlers/contact_form');
+const { sendContactFormEmail } = require('./mail/contact_sender');
 
 const ALLOWED_ORIGINS = ['https://bigdevdog.com', 'https://www.bigdevdog.com'];
 const ALLOWED_METHODS = ['OPTIONS', 'POST'];
